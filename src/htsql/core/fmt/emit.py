@@ -84,8 +84,7 @@ def emit(format, product):
     if isinstance(format, str):
         format = Accept.__invoke__(format)
         assert not isinstance(format, DefaultFormat), "unknown format"
-    tail = (line.encode('utf-8') if isinstance(line, str) else line
-            for line in Emit.__invoke__(format, product))
+    tail = ( line for line in Emit.__invoke__(format, product))
     head = []
     for chunk in tail:
         head.append(chunk)

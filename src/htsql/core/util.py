@@ -632,7 +632,7 @@ class cachedproperty:
 #
 
 
-class frozenomap(collections.Mapping):
+class frozenomap(collections.abc.Mapping):
     """
     An ordered immutable mapping.
 
@@ -647,7 +647,7 @@ class frozenomap(collections.Mapping):
         # key -> value dictionary.
         self._value_by_key = {}
         # Initialize the mapping with elements from `iterable`.
-        if isinstance(iterable, collections.Mapping):
+        if isinstance(iterable, collections.abc.Mapping):
             iterable = iter(iterable.items())
         if iterable is not None:
             for key, value in iterable:
@@ -711,7 +711,7 @@ class frozenomap(collections.Mapping):
         return [self._value_by_key[key] for key in self._keys]
 
 
-class omap(frozenomap, collections.MutableMapping):
+class omap(frozenomap, collections.abc.MutableMapping):
     """
     An ordered mutable mapping.
 
@@ -748,7 +748,7 @@ class omap(frozenomap, collections.MutableMapping):
         self._value_by_key = {}
 
     def update(self, iterable):
-        if isinstance(iterable, collections.Mapping):
+        if isinstance(iterable, collections.abc.Mapping):
             iterable = iter(iterable.items())
         for key, value in iterable:
             if key not in self._value_by_key:
